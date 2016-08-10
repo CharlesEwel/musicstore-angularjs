@@ -1,14 +1,19 @@
 import { Component } from 'angular2/core';
 import { Cd } from './cd.model';
 import { CdListComponent } from './cd-list.component';
+import { Cart } from './cart.component';
 
 @Component({
   selector: 'my-app',
-  directives: [CdListComponent],
+  directives: [CdListComponent, Cart],
   template: `
-    <h1>Skeleton Angular2 App!</h1>
+    <h1>Epicodus Music Emporium</h1>
+    <h2>For Sale</h2>
     <cd-list [cdList]= "cds">
     </cd-list>
+    <h2>My Cart</h2>
+    <cart [cdList]= "cds">
+    </cart>
   `
 })
 

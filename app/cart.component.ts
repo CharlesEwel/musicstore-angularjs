@@ -6,7 +6,7 @@ import { GenrePipe } from './genre.pipe';
 import { InCartPipe } from './in-cart.pipe'
 
 @Component ({
-  selector: 'cd-list',
+  selector: 'cart',
   inputs: ['cdList'],
   directives: [CdComponent],
   pipes: [ArtistPipe, GenrePipe, InCartPipe],
@@ -27,14 +27,15 @@ import { InCartPipe } from './in-cart.pipe'
   <cd-display *ngFor="#currentCd of cdList | artist:filterArtist | genre:filterGenre | inCart:filterCart"
     [cd]="currentCd">
   </cd-display>
+  <p>Total Price: {{calculateTotal(cdList)}}</p>
   `
 })
 
-export class CdListComponent {
+export class Cart {
   public cdList: Cd[];
   public filterArtist: string ="all";
   public filterGenre: string ="all";
-  public filterCart: boolean = false;
+  public filterCart: boolean = true;
 
   onGenreChange(filterOption){
     this.filterGenre = filterOption;
@@ -42,5 +43,15 @@ export class CdListComponent {
 
   onArtistChange(filterOption){
     this.filterArtist = filterOption;
+  }
+
+  calculateTotal(cds) {
+    var total:number =0;
+    cds.forEach(function(cd){
+      if(cd.inCart){
+        total += cd.price;
+      }
+    });
+    return total;
   }
 }
