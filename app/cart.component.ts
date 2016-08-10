@@ -27,7 +27,7 @@ import { InCartPipe } from './in-cart.pipe'
   <cd-display *ngFor="#currentCd of cdList | artist:filterArtist | genre:filterGenre | inCart:filterCart"
     [cd]="currentCd">
   </cd-display>
-  <p>Total Price: {{calculateTotal(cdList)}}</p>
+  <p>Total Price: \${{calculateTotal(cdList)}}</p>
   `
 })
 
